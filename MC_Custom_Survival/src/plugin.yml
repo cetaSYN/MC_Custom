@@ -1,0 +1,23 @@
+name: MC_Custom_Survival
+main: com.mc_custom.survival.MC_Custom_Survival
+version: 1.5.0_0
+authors: removed
+depend: [MC_Custom_Core]
+website: http://url_removed
+
+commands:
+  tp: 
+    description: Handles tp-commands.
+    usage: /tp [params]
+  tphere: 
+    description: Handles tphere-commands.
+    usage: /tphere [player]
+  tppos: 
+    description: Handles tppos-commands.
+    usage: /tppos [params]
+permissions:
+  survival.*:
+    children:
+      survival.teleport: true
+      survival.tphere: true
+      survival.tppos: true

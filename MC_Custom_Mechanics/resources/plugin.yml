@@ -1,0 +1,6 @@
+name: MC_Custom_Physics
+main: com.mc_custom.physics.MC_Custom_Physics
+version: 0
+author: [MC_Custom_Devs]
+depend: [MC_Custom_Core]
+website: https://url_removed

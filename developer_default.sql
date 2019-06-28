@@ -1,0 +1,10 @@
+USE `minecraft`;
+TRUNCATE groups;
+INSERT INTO groups (group_name, group_prefix, hierarchy_set, parent_of) VALUES ('dev', '&a', 1, 0);
+TRUNCATE group_perms;
+INSERT INTO group_perms (group_id, perm_node) VALUES (1, 'core.*');
+INSERT INTO group_perms (group_id, perm_node) VALUES (1, 'pds.*');
+INSERT INTO group_perms (group_id, perm_node) VALUES (1, 'class.*');
+INSERT INTO group_perms (group_id, perm_node) VALUES (1, 'punish.*');
+INSERT INTO group_perms (group_id, perm_node) VALUES (1, 'quests.*');
+INSERT INTO group_perms (group_id, perm_node) VALUES (1, '*');

@@ -1,0 +1,6 @@
+name: MC_Custom_Patch_IPBan
+main: com.mc_custom.patch.MC_Custom_Patch_IPBan
+version: 0
+author: [MC_Custom_Devs]
+depend: [MC_Custom_Core]
+website: https://url_removed

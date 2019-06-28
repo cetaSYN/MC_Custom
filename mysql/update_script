@@ -1,0 +1,99 @@
+DROP TABLE `minecraft`.`players`;
+
+CREATE TABLE `minecraft`.`players` 
+(`id` INT(8) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `name` VARCHAR(18) NOT NULL,
+ `chat_filter` TINYINT(1) NOT NULL DEFAULT TRUE,
+ `forum_id` VARCHAR(255) NULL,
+ `registration_code` VARCHAR(10) NULL,
+ UNIQUE INDEX `name` (`name` ASC))
+ ENGINE = InnoDB;
+
+SELECT "1";
+
+CREATE TABLE `minecraft`.`permission_groups` 
+(`id` INT(2) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `name` VARCHAR(20) NOT NULL,
+ `server` VARCHAR(20) NOT NULL)
+ ENGINE=InnoDB;
+
+SELECT "2";
+
+CREATE TABLE `minecraft`.`group_nodes` 
+(`group_id` INT(2) UNSIGNED NOT NULL,
+ `permission_node` VARCHAR(60) NOT NULL,
+ KEY `group_id` (`group_id`),
+ CONSTRAINT `group_id` FOREIGN KEY `group_id` (`group_id`)
+ REFERENCES `minecraft`.`permission_groups` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+ ENGINE=InnoDB;
+
+DROP TABLE mail;
+
+CREATE TABLE `minecraft`.`mail` 
+(`player_id` INT(8) UNSIGNED NOT NULL,
+ `is_read` BOOLEAN NOT NULL DEFAULT 0,
+ `message` TINYTEXT NOT NULL,
+ INDEX `player_id` (`player_id` ASC),
+ CONSTRAINT FOREIGN KEY `player_id` (`player_id`)
+ REFERENCES `minecraft`.`players` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+ ENGINE=InnoDB;
+
+SELECT "3";
+
+CREATE TABLE `minecraft`.`player_nodes` 
+(`player_id` INT(8) UNSIGNED NOT NULL,
+ `permission_node` VARCHAR(60) NOT NULL,
+ KEY `player_id` (`player_id`),
+ CONSTRAINT `player_id` FOREIGN KEY `player_id` (`player_id`)
+ REFERENCES `minecraft`.`players` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+ ENGINE=InnoDB;
+
+CREATE TABLE `minecraft`.`player_groups` 
+(`group_id` INT(2) UNSIGNED NOT NULL,
+ `player_id` INT(8) UNSIGNED NOT NULL,
+ KEY `group_id` (`group_id`),
+ KEY `player_id` (`player_id`),
+ CONSTRAINT FOREIGN KEY `group_id` (`group_id`)
+ REFERENCES `minecraft`.`permission_groups` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ CONSTRAINT FOREIGN KEY `player_id` (`player_id`)
+ REFERENCES `minecraft`.`players` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+ ENGINE=InnoDB;
+
+SELECT "4";
+
+CREATE TABLE `minecraft`.`nicknames` 
+(`player_id` INT(8) UNSIGNED NOT NULL,
+ `nickname` VARCHAR(16) NOT NULL,
+ `last_change` DATETIME NULL,
+ UNIQUE KEY `player_id` (`player_id`),
+ CONSTRAINT FOREIGN KEY `player_id` (`player_id`)
+ REFERENCES `minecraft`.`players` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)
+ ENGINE=InnoDB;
+
+ALTER TABLE `minecraft`.`bans` RENAME `minecraft`.`punishments`;
+ALTER TABLE `minecraft`.`punishments` MODIFY COLUMN `action` INT(2) NOT NULL;
+
+INSERT IGNORE INTO `minecraft`.`players` (`name`) VALUES ("CONSOLE");
+INSERT IGNORE INTO `minecraft`.`players` (`name`) SELECT `moderator_name` FROM `minecraft`.`punishments` GROUP BY `player_name`;
+INSERT IGNORE INTO `minecraft`.`players` (`name`) SELECT `player_name` FROM `minecraft`.`punishments` GROUP BY `player_name`;
+INSERT IGNORE INTO `minecraft`.`players` (`name`) SELECT `player_name` FROM `minecraft`.`classes` GROUP BY `player_name`;
+
+SELECT "5";
+
+ALTER TABLE `minecraft`.`punishments` ADD COLUMN `player_id` INT(8) UNSIGNED NOT NULL AFTER `player_name`;
+ALTER TABLE `minecraft`.`punishments` ADD COLUMN `moderator_id` INT(8) UNSIGNED NOT NULL AFTER `moderator_name`;
+UPDATE `minecraft`.`punishments` INNER JOIN `minecraft`.`players` ON `player_name` = `name` SET `punishments`.`player_id`=`players`.`id`;
+UPDATE `minecraft`.`punishments` INNER JOIN `minecraft`.`players` ON `moderator_name` = `name` SET `punishments`.`moderator_id`=`players`.`id`;
+ALTER TABLE `minecraft`.`punishments` DROP COLUMN `player_name`;
+ALTER TABLE `minecraft`.`punishments` DROP COLUMN `moderator_name`;
+
+CREATE TABLE `minecraft`.`statistics`
+(`player_id` INT(8) UNSIGNED NOT NULL,
+ `first_join` DATETIME NOT NULL,
+ `last_join` DATETIME NOT NULL,
+ `time_online` INT(16) NOT NULL,
+ KEY `player_id` (`player_id`),
+ CONSTRAINT FOREIGN KEY `player_id` (`player_id`)
+ REFERENCES `minecraft`.`players` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)
+ ENGINE=InnoDB;
+

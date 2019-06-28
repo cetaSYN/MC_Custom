@@ -1,0 +1,6 @@
+name: MC_Custom_Password
+main: com.mc_custom.password.MC_Custom_Password
+version: 0
+author: [MC_Custom_Devs]
+depend: [MC_Custom_Core]
+website: https://url_removed

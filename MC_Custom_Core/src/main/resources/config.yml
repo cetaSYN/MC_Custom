@@ -1,0 +1,15 @@
+# [SQL Info]
+# Host, Port, Database, Username, and Password for accessing a MySQL database.
+#[Boundary Info]
+# Min and Max X and Z coordinates for the world boundary.
+sql:
+  host: localhost
+  username: username
+  password: password
+  port: 3306
+  database: minecraft
+boundary:
+  maxX: 100000
+  maxZ: 100000
+  minX: -100000
+  minZ: -100000

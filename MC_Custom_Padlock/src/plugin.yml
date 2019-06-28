@@ -1,0 +1,20 @@
+name: MC_Custom_Padlock
+main: com.mc_custom.padlock.MC_Custom_Padlock
+version: 0
+authors: removed
+depend: [MC_Custom_Core]
+website: http://url_removed
+
+commands:
+  lock:
+    description: Lock a block (Hey, that rhymes)
+  unlock:
+    description: Unlock a protected block
+  key:
+    description: Manage who has access to a protected block
+permissions:
+  padlock.*:
+    children:
+      padlock.lock: true
+      padlock.unlock: true
+      padlock.key: true

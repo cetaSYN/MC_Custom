@@ -1,0 +1,34 @@
+name: MC_Custom_Chat
+main: com.mc_custom.chat.MC_Custom_Chat
+version: 1.5.2_1
+authors: removed
+depend: [MC_Custom_Core]
+website: http://url_removed
+
+commands:
+  chat: 
+    description: Handles chat-commands.
+    usage: /chat [params]
+    aliases: ch
+  me: 
+    description: action command
+    usage: /me [action]
+permissions:
+  chat.*:
+    children:
+      chat.announce: true
+      chat.bypass: true
+      chat.create: true
+      chat.invite: true
+      chat.join: true
+      chat.kick: true
+      chat.list: true
+      chat.lock: true
+      chat.me: true
+      chat.monitor: true
+      chat.moveself: true
+      chat.mute: true
+      chat.lock: true
+      chat.pass: true
+      chat.remove: true
+      chat.rename: true

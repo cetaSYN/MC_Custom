@@ -1,0 +1,6 @@
+name: MC_Custom_PDS
+main: com.mc_custom.pds.MC_Custom_PDS
+version: 0
+authors: [MC_Custom_Devs]
+depend: [MC_Custom_Core, MC_Custom_Punishments, WorldGuard]
+website: https://url_removed

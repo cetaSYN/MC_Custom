@@ -1,0 +1,41 @@
+name: MC_Custom_Punishments
+main: com.mc_custom.punishments.MC_Custom_Punishments
+version: 0
+authors: removed
+depend: [MC_Custom_Core]
+website: http://url_removed
+
+commands:
+  kick:
+    description: Kicks a player.
+  ban:
+    description: Bans a player.
+  permban: 
+    description: Bans a player. The same as /ban. Deprecated.
+    usage: /permban {playername} {comment}
+  unban:
+    description: Unbans a player.
+    usage: /unban {playername} {comment}
+  mute:
+    description: Mutes a player.
+  unmute:
+    description: Unmutes a player.
+  freeze:
+    description: Freezes a player.
+  thaw:
+    description: Thaws (unfreezes) a player.
+  warn:
+    description: Warns a player.
+permissions:
+  punish.*:
+    children:
+      punish.kick: true
+      punish.ban: true
+      punish.unban: true
+      punish.mute: true
+      punish.unmute: true
+      punish.override: true
+      punish.freeze: true
+      punish.thaw: true
+      punish.warn: true
+      punish.receive_warnings: true

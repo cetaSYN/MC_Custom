@@ -1,0 +1,20 @@
+name: MC_Custom_Classes
+main: com.mc_custom.classes.MC_Custom_Classes
+version: 1.5.2_1
+authors: [MC_Custom_Devs]
+depend: [MC_Custom_Core]
+website: http://url_removed
+
+commands:
+  class:
+    description: Class commands.
+permissions:
+  class.*:
+    children:
+      class.getself: true
+      class.getother: true
+      class.changeself: true
+      class.changeother: true
+      class.timechange: true
+      class.donor: true
+      class.custom1: true

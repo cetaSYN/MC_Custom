@@ -1,0 +1,26 @@
+name: MC_Custom_Core
+main: com.mc_custom.core.MC_Custom_Core
+version: 1.5.2_1
+authors: [MC_Custom_Devs]
+depend: [ProtocolLib]
+website: http://url_removed
+
+commands:
+  tp:
+    description: teleport
+  tpa:
+    description: teleport accept
+  give:
+    description: give
+  invsee:
+    description: invsee
+  msg:
+    description: message
+  r:
+    description: reply
+  nick:
+    description: nick
+  rn:
+    description: realname
+  cmd-wrap:
+    description: Internal command wrapping
